@@ -2,4 +2,9 @@ type Hash = {
     hash: string;
 }
 
-export type { Hash }
+type Login = {
+    email: string;
+    password: string;
+}
+
+export type { Hash, Login }

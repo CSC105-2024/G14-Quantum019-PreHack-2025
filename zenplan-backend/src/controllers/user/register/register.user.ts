@@ -1,6 +1,8 @@
 import type { Context } from "hono"
 import * as userModel from "../../../models/user.model.ts"
 import { generateToken } from "../../../utils/token.ts"
+import { generateHash } from "../../../utils/hash.ts"
+import { register } from "./register.service.ts"
 
 type createUser = {
     name: string,
@@ -17,7 +19,9 @@ const registerUser = async (c: Context) => {
             return c.json({ success: false, msg: 'Email already exists' }, 409)
         }
 
-        const user = await userModel.registerUser(name, email, password)
+        const hash = await generateHash(password);
+
+        const user = await register(name, email, hash);
         const token = generateToken(user);
 
         return c.json({ success: true, token }, 201)

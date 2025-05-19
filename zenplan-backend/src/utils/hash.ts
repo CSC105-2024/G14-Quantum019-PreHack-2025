@@ -3,12 +3,12 @@ import bcrypt from "bcrypt";
 import * as userModel from "../models/user.model.ts";
 import type { Hash } from "../types/types.ts";
 
-// const generateHash = async (password: string) => {
-//   const salt = await bcrypt.genSalt();
-//   const newHash = await bcrypt.hash(password, salt);
+ const generateHash = async (password: string) => {
+   const salt = await bcrypt.genSalt();
+   const newHash = await bcrypt.hash(password, salt);
 
-//   return newHash;
-// };
+   return newHash;
+};
 
 const compareHash = async (password: string, id: number) => {
   const { hash } = (await userModel.findPassword(id)) as Hash;
@@ -17,4 +17,4 @@ const compareHash = async (password: string, id: number) => {
   return valid;
 };
 
-export { compareHash };
+export { generateHash, compareHash };

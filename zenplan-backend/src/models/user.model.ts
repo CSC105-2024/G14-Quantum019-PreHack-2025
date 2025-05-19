@@ -5,23 +5,26 @@ import { db } from "../index.ts"
 const registerUser = async (
     name: string, 
     email: string,
-    password: string 
+    trx: any,
 ) => {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await db.user.create({
+    //const salt = await bcrypt.genSalt();
+    //const hashedPassword = await bcrypt.hash(password, salt);
+    const user = await trx.user.create({
         data: { name: name,
                 email: email, 
         },
     })
-    
-    await db.password.create({
+
+    return user;
+}
+
+const registerPassword = async (user_id: number, hash: string, trx: any) => {
+    const password = await trx.password.create({
         data: {
-            hash: hashedPassword,
-            user_id: user.id,
+            user_id: user_id,
+            hash: hash,
         }
     })
-    return user;
 }
 
 const findPassword = async (user_id: number) => {
@@ -35,4 +38,4 @@ const findUserByEmail = async (email: string) => {
     return db.user.findUnique({ where: { email }})
 }
 
-export { registerUser, findPassword, findUserByEmail }
+export { registerUser, registerPassword, findPassword, findUserByEmail }
