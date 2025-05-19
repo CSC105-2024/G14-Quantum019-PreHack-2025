@@ -10,6 +10,48 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password Password?
+  list List[]
+}
+
+model Password {
+  id Int @id @default(autoincrement())
+  hash String
+  user_id Int @unique
+  user User @relation(fields: [user_id],references: [id])
+}
+
+model List {
+  id Int @id @default(autoincrement())
+  title String
+  category Category
+  time DateTime?
+  description String?
+  note String?
+  is_complete Boolean @default(false)
+  user_id Int
+  user User @relation(fields: [user_id],references: [id])
+}
+
+
+enum Category {
+  NUTRITION_AND_DIET
+  SELF_CARE_AND_LIFESTYLE
+  EXERCISE_AND_MOVEMENT
+  HOBBIES_AND_RELAXATION
+  STRESS_MANAGEMENT
+  MEDICAL_CHECKUPS
+  HYDRATION
+  PREVENTIVE_HEALTH
+  MENTAL_AND_EMOTIONAL_WELLNESS
+  RELATIONSHIP_AND_SOCIAL_WELLNESS
 }
