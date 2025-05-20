@@ -1,12 +1,13 @@
 import type { Context } from "hono";
 import * as ListModel from "../../../models/list.model.ts";
+import { db } from "../../../index.ts";
 
 const getLists = async (c: Context) => {
   //TODO:Temp
   const user_id = 1;
 
   try {
-    const lists = await ListModel.getLists(user_id);
+    const lists = await ListModel.getLists(user_id, "def", db);
 
     return c.json(
       {

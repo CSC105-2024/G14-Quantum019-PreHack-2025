@@ -4,14 +4,21 @@ import * as ListModel from "../../../models/list.model.ts";
 
 const toggle = async (pair: IdPair) => {
   const list = await db.$transaction(async (trx) => {
-    const listInfo = await ListModel.findList(pair, trx);
+    try {
+      const listInfo = await ListModel.findList(pair, trx);
 
-    const toggled = await ListModel.toggeledList(
-      pair,
-      listInfo.is_complete,
-      trx
-    );
-    return toggled;
+      const toggled = await ListModel.toggeledList(
+        pair,
+        listInfo.is_complete,
+        trx
+      );
+      return toggled;
+    } catch (error) {
+      console.log(error);
+      throw new Error(
+        "Failed to toggle the list status. Please try again later."
+      );
+    }
   });
   return list;
 };

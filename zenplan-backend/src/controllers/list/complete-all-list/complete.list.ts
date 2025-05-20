@@ -1,11 +1,11 @@
 import type { Context } from "hono";
-import * as ListModel from "../../../models/list.model.ts";
+import { completeAll } from "./complete.service.ts";
 
 const completeLists = async (c: Context) => {
   const user_id = 1; //TODO: temp
 
   try {
-    const lists = await ListModel.completeLists(user_id);
+    const lists = await completeAll(user_id);
 
     return c.json(
       {
