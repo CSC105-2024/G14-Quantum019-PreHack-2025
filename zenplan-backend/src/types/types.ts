@@ -7,4 +7,14 @@ type Login = {
     password: string;
 }
 
-export type { Hash, Login }
+type Id = {
+  id: number;
+};
+
+type createUser = {
+    name: string,
+    email: string,
+    password: string,
+}
+
+export type { Hash, Login, Id, createUser }

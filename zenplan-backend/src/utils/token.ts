@@ -11,11 +11,11 @@ export const generateToken = (user: { id: number }) => {
         throw new Error('JWT_SECRET is not defined in environment variables')
     }
 
-    return jwt.sign({ userId: user.id}, secret, {expiresIn: '7d'})
+    return jwt.sign({ id: user.id}, secret, {expiresIn: '7d'})
 }
 
 export const verifyToken = (token: string): JwtPayload | null => {
-    const secret = process.env.JWT_Secret
+    const secret = process.env.JWT_Secret!
 
     if (!secret) {
         throw new Error('JWT_SECRET is not defined in environment variables')
