@@ -1,24 +1,29 @@
 import type { Context, Next } from "hono";
 import jwt from "jsonwebtoken";
 import type { Id } from "../types/types.ts";
+import { getSignedCookie } from "hono/cookie";
+import { findInfo } from "../models/user.model.ts";
 
 const verify = async (c: Context, next: Next) => {
-  const token = c.req.header("authorization");
-  if (!token) throw new Error("Token is required");
+    try {
+    const cookie = await getSignedCookie(
+      c,
+      process.env.COOKIE_SECRET_KEY!,
+      "jwt"
+    );
 
-  const bearerToken = token.split(" ")[1];
+    if (typeof cookie !== "string") throw new Error("Invalid or missing token");
 
-  if (!bearerToken) throw new Error("Bearer token is missing");
-
-  try {
-    
     const { id } = jwt.verify(
-      bearerToken,
+      cookie,
       process.env.JWT_SECRET!
-    ) as { id: number };
+    ) as Id;
 
-    c.set("id", id);
+    const info = await findInfo(id);
 
+    if (!info) throw new Error("User not found");
+
+    c.set("user_id", id);
     await next();
   } catch (error) {
     console.error(error);

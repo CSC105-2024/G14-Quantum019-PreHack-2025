@@ -10,7 +10,7 @@ const registerUser = async (c: Context) => {
     try {
         const { name, email, password } = await c.req.json<createUser>()
 
-        const existing = await userModel.findUserByEmail(email)
+        const existing = await userModel.findInfo(email)
         if (existing) {
             return c.json({ success: false, msg: 'Email already exists' }, 409)
         }

@@ -12,7 +12,7 @@ const loginUser = async (c: Context) => {
     try {
         const {email, password}: Login = await c.req.json();
 
-        const info = await userModel.findUserByEmail(email);
+        const info = await userModel.findInfo(email);
         if(!info) {
             return c.json({ success: false, msg: 'Invalid email' }, 401)
         }

@@ -7,8 +7,6 @@ const registerUser = async (
     email: string,
     trx: any,
 ) => {
-    //const salt = await bcrypt.genSalt();
-    //const hashedPassword = await bcrypt.hash(password, salt);
     const user = await trx.user.create({
         data: { name: name,
                 email: email, 
@@ -34,8 +32,16 @@ const findPassword = async (user_id: number) => {
     return hash;
 }
 
-const findUserByEmail = async (email: string) => {
-    return db.user.findUnique({ where: { email }})
-}
 
-export { registerUser, registerPassword, findPassword, findUserByEmail }
+const findInfo = async (identifier: string | number) => {
+  const user = await db.user.findUnique({
+    where:
+      typeof identifier === "string"
+        ? { email: identifier }
+        : { id: identifier },
+  });
+
+  return user;
+};
+
+export { registerUser, registerPassword, findPassword, findInfo }
