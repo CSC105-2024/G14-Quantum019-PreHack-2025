@@ -10,9 +10,9 @@ const listRouter = new Hono();
 
 listRouter.get("/get", getLists);
 listRouter.post("/create", createList);
-listRouter.put("/edit:id", editList);
-listRouter.delete("/delete:id", deletList);
-listRouter.patch("/toggle:id", toggleList);
+listRouter.put("/edit/:id", editList);
+listRouter.delete("/delete/:id", deletList);
+listRouter.patch("/toggle/:id", toggleList);
 listRouter.patch("/complete", completeLists);
 
 export { listRouter };

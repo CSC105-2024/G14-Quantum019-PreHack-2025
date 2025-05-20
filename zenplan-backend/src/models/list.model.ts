@@ -30,18 +30,31 @@ export const createList = async (list: List, user_id: number) => {
 };
 
 export const editList = async (list: List, pair: IdPair) => {
-  const editedList = await db.list.update({
-    where: { id: pair.id, user_id: pair.user_id },
-    data: {
-      title: list.title,
-      category: list.category,
-      time: list.category,
-      description: list.description,
-      note: list.note,
-    },
-  });
+  try {
+    const editedList = await db.list.upsert({
+      where: { id: pair.id, user_id: pair.user_id },
+      update: {
+        title: list.title,
+        category: list.category,
+        time: list.time,
+        description: list.description,
+        note: list.note,
+      },
+      create: {
+        title: list.title,
+        category: list.category,
+        time: list.time,
+        description: list.description,
+        note: list.note,
+        user_id: pair.user_id,
+      },
+    });
 
-  return editedList;
+    return editedList;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to edit list. Please check your input.");
+  }
 };
 
 export const deleteList = async (pair: IdPair) => {
