@@ -6,7 +6,7 @@ const toggle = async (pair: IdPair) => {
   const list = await db.$transaction(async (trx) => {
     const listInfo = await ListModel.findList(pair, trx);
 
-    const toggled = await ListModel.comepleteList(
+    const toggled = await ListModel.toggeledList(
       pair,
       listInfo.is_complete,
       trx

@@ -11,18 +11,22 @@ export const getLists = async (user_id: number) => {
 };
 
 export const createList = async (list: List, user_id: number) => {
-  const createdList = await db.list.create({
-    data: {
-      title: list.title,
-      category: list.category,
-      time: list.category,
-      description: list.description,
-      note: list.note,
-      user_id: user_id,
-    },
-  });
-
-  return createdList;
+  try {
+    const createdList = await db.list.create({
+      data: {
+        title: list.title,
+        category: list.category,
+        time: list.time,
+        description: list.description,
+        note: list.note,
+        user_id: user_id,
+      },
+    });
+    return createdList;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to create list. Please check your input.");
+  }
 };
 
 export const editList = async (list: List, pair: IdPair) => {
@@ -48,20 +52,20 @@ export const deleteList = async (pair: IdPair) => {
   return deletedList;
 };
 
-export const findList = async (pair: IdPair, db: Prisma.TransactionClient) => {
-  const list = await db.list.findUnique({
+export const findList = async (pair: IdPair, trx: Prisma.TransactionClient) => {
+  const list = await trx.list.findUnique({
     where: { id: pair.id, user_id: pair.user_id },
   });
 
   return list;
 };
 
-export const comepleteList = async (
+export const toggeledList = async (
   pair: IdPair,
   is_complete: boolean,
-  db: Prisma.TransactionClient
+  trx: Prisma.TransactionClient
 ) => {
-  const toggeledList = await db.list.update({
+  const toggeledList = await trx.list.update({
     where: { id: pair.id, user_id: pair.user_id },
     data: {
       is_complete: {
@@ -71,4 +75,15 @@ export const comepleteList = async (
   });
 
   return toggeledList;
+};
+
+export const completeLists = async (user_id: number) => {
+  const lists = await db.list.updateMany({
+    where: { is_complete: false, user_id: user_id },
+    data: {
+      is_complete: true,
+    },
+  });
+
+  return lists;
 };

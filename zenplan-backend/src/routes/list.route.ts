@@ -4,6 +4,7 @@ import { createList } from "../controllers/list/create-list/create.list.ts";
 import { editList } from "../controllers/list/edit-list/edit.list.ts";
 import { deletList } from "../controllers/list/delete-list/delete.list.ts";
 import { toggleList } from "../controllers/list/toggle-list/toggle.list.ts";
+import { completeLists } from "../controllers/list/complete-all-list/complete.list.ts";
 
 const listRouter = new Hono();
 
@@ -12,5 +13,6 @@ listRouter.post("/create", createList);
 listRouter.put("/edit:id", editList);
 listRouter.delete("/delete:id", deletList);
 listRouter.patch("/toggle:id", toggleList);
+listRouter.patch("/complete", completeLists);
 
 export { listRouter };
