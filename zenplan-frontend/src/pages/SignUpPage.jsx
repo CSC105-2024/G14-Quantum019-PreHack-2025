@@ -6,8 +6,11 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import useRegister from "@/hooks/useRegister";
 
 const SignUpPage = () => {
+  const { registerUser, registerError, setRegisterError } = useRegister();
+
   const signupSchema = z.object({
     name: z.string(),
     email: z.string().email(),
@@ -33,10 +36,11 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
-      console.log("Passwords do not match");
+      setRegisterError("Passwords do not match");
       return;
+    } else {
+      await registerUser(data.name, data.email, data.password);
     }
-
     console.log("Form data: ", data);
   };
 
@@ -61,7 +65,7 @@ const SignUpPage = () => {
             icon={<User size={18} />}
             type={"text"}
             placeholder={"Enter your name"}
-            props={register("name")}
+            {...register("name")}
           />
 
           <FormInput
@@ -69,8 +73,7 @@ const SignUpPage = () => {
             icon={<Mail size={18} />}
             type={"email"}
             placeholder={"Enter your email"}
-            props={register("email")}
-            error={errors.email?.message}
+            {...register("email")}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mb-1">{errors.email.message}</p>
@@ -81,10 +84,12 @@ const SignUpPage = () => {
             icon={<Lock size={18} />}
             type={"password"}
             placeholder={"Enter your password"}
-            props={register("password")}
+            {...register("password")}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mb-1">{errors.password.message}</p>
+            <p className="text-red-500 text-sm mb-1">
+              {errors.password.message}
+            </p>
           )}
 
           <FormInput
@@ -92,8 +97,13 @@ const SignUpPage = () => {
             icon={<Lock size={18} />}
             type={"password"}
             placeholder={"Re-enter your password"}
-            props={register("confirmPassword")}
+            {...register("confirmPassword")}
           />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm mb-1">
+              {errors.confirmPassword.message}
+            </p>
+          )}
 
           <div className="mt-2 mb-6 flex justify-center items-center">
             <input

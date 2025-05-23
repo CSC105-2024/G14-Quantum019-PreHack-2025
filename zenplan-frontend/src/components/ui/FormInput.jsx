@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({ label, icon, type, name, placeholder, error, props }) => {
+const FormInput = ({ label, icon, type, name, placeholder, error, ...props }) => {
   return (
     <div className="lg:w-100 w-80 mb-4">
       <label className="block text-sm text-left font-medium text-neutral-700 mb-1">
