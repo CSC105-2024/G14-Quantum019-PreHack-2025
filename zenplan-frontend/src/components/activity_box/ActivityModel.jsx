@@ -74,7 +74,8 @@ const ActivityModel = ({ mode, setOpen }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const test = new Date(data.time).toString();
+    console.log(test);
   };
 
   return (
@@ -87,7 +88,11 @@ const ActivityModel = ({ mode, setOpen }) => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Enter title" {...field} />
+                <Input
+                  placeholder="Enter title"
+                  {...field}
+                  className={"text-black"}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -102,7 +107,7 @@ const ActivityModel = ({ mode, setOpen }) => {
                 <FormLabel>Category</FormLabel>
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className={"w-full"}>
+                    <SelectTrigger className={"w-full text-black"}>
                       <SelectValue placeholder="Select a Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -125,7 +130,7 @@ const ActivityModel = ({ mode, setOpen }) => {
           <label htmlFor="" className="font-bold">
             Time
           </label>
-          <div className="border p-2 rounded-md mt-1">
+          <div className="border p-2 rounded-md mt-1 text-black">
             <Controller
               control={form.control}
               name={"time"}
@@ -154,7 +159,11 @@ const ActivityModel = ({ mode, setOpen }) => {
               <FormItem>
                 <FormLabel>Description (optional)</FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder="description" />
+                  <Textarea
+                    {...field}
+                    placeholder="description"
+                    className={"text-black"}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -169,7 +178,11 @@ const ActivityModel = ({ mode, setOpen }) => {
               <FormItem>
                 <FormLabel>Note (optional)</FormLabel>
                 <FormControl>
-                  <Textarea {...field} placeholder="note" />
+                  <Textarea
+                    {...field}
+                    placeholder="note"
+                    className={"text-black"}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
