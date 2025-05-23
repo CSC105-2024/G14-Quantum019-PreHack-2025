@@ -3,8 +3,43 @@ import { Link, useNavigate } from "react-router-dom";
 import { Leaf, Lock, Mail, User } from "lucide-react";
 import FormInput from "@/components/ui/FormInput";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 const SignUpPage = () => {
+  const signupSchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters long"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    if (data.password !== data.confirmPassword) {
+      console.log("Passwords do not match");
+      return;
+    }
+
+    console.log("Form data: ", data);
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen min-w-screen bg-neutral-50 p-4">
       <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-8">
@@ -20,12 +55,13 @@ const SignUpPage = () => {
           </p>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             label={"Full Name"}
             icon={<User size={18} />}
             type={"text"}
             placeholder={"Enter your name"}
+            props={register("name")}
           />
 
           <FormInput
@@ -33,20 +69,30 @@ const SignUpPage = () => {
             icon={<Mail size={18} />}
             type={"email"}
             placeholder={"Enter your email"}
+            props={register("email")}
+            error={errors.email?.message}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mb-1">{errors.email.message}</p>
+          )}
 
           <FormInput
             label={"Password"}
             icon={<Lock size={18} />}
             type={"password"}
             placeholder={"Enter your password"}
+            props={register("password")}
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm mb-1">{errors.password.message}</p>
+          )}
 
           <FormInput
             label={"Confirm Password"}
             icon={<Lock size={18} />}
             type={"password"}
             placeholder={"Re-enter your password"}
+            props={register("confirmPassword")}
           />
 
           <div className="mt-2 mb-6 flex justify-center items-center">
