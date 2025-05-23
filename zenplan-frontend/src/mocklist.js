@@ -2,7 +2,7 @@ export const mockLists = [
   {
     id: 1,
     title: "Morning Yoga Routine",
-    category: "EXERCISE",
+    category: "Exercise",
     time: "2025-05-01T07:30:00",
     description: "Start the day with a 30-minute yoga session.",
     note: "Try to include more stretching.",
@@ -12,7 +12,7 @@ export const mockLists = [
   {
     id: 2,
     title: "Drink 8 Glasses of Water",
-    category: "HYDRATION",
+    category: "Hydration",
     time: "2025-05-02T10:00:00",
     description: "Track water intake throughout the day.",
     note: null,
@@ -22,7 +22,7 @@ export const mockLists = [
   {
     id: 3,
     title: "Doctor's Appointment",
-    category: "MEDICAL_CHECKUPS",
+    category: "Medical Checkups",
     time: "2025-05-03T15:00:00",
     description: "Annual physical exam with Dr. Smith.",
     note: "Bring medical records.",
@@ -32,7 +32,7 @@ export const mockLists = [
   {
     id: 4,
     title: "Meditation Session",
-    category: "STRESS_MANAGEMENT",
+    category: "Stress Management",
     time: "2025-05-04T20:00:00",
     description: "Use Headspace for a guided meditation.",
     note: "Focus on breathing techniques.",
@@ -42,7 +42,7 @@ export const mockLists = [
   {
     id: 5,
     title: "Cook a Healthy Meal",
-    category: "NUTRITION",
+    category: "Nutrition",
     time: "2025-05-05T18:30:00",
     description: "Prepare a balanced dinner with veggies and protein.",
     note: "Try a new quinoa recipe.",
@@ -52,7 +52,7 @@ export const mockLists = [
   {
     id: 6,
     title: "Call a Friend",
-    category: "SOCIAL_WELLNESS",
+    category: "Social Wellness",
     time: "2025-05-06T19:00:00",
     description: "Catch up with Sarah and check in on her.",
     note: "Ask about her new job.",
@@ -62,7 +62,7 @@ export const mockLists = [
   {
     id: 7,
     title: "Painting Session",
-    category: "HOBBIES",
+    category: "Hobbies",
     time: "2025-05-07T14:00:00",
     description: "Work on landscape painting.",
     note: "Use the new watercolors.",
@@ -72,7 +72,7 @@ export const mockLists = [
   {
     id: 8,
     title: "Gratitude Journal",
-    category: "EMOTIONAL_WELLNESS",
+    category: "Emotional Wellness",
     time: "2025-05-08T21:30:00",
     description: "Write 3 things you're grateful for today.",
     note: null,
@@ -82,7 +82,7 @@ export const mockLists = [
   {
     id: 9,
     title: "Skincare Routine",
-    category: "SELFCARE",
+    category: "Selfcare",
     time: "2025-05-09T22:00:00",
     description: "Cleanse, tone, moisturize before bed.",
     note: "Try the new serum.",
@@ -92,7 +92,7 @@ export const mockLists = [
   {
     id: 10,
     title: "Health Goals Planning",
-    category: "HEALTH",
+    category: "Health",
     time: "2025-05-10T16:00:00",
     description: "Set health goals for the next month.",
     note: "Include diet and exercise targets.",
@@ -102,7 +102,7 @@ export const mockLists = [
   {
     id: 11,
     title: "Go for a Morning Walk",
-    category: "EXERCISE",
+    category: "Exercise",
     time: "2025-05-24T06:45:00",
     description: "A brisk walk around the park.",
     note: "Wear walking shoes.",
@@ -112,7 +112,7 @@ export const mockLists = [
   {
     id: 12,
     title: "Try a New Healthy Recipe",
-    category: "NUTRITION",
+    category: "Nutrition",
     time: "2025-05-25T17:00:00",
     description: "Cook a plant-based meal.",
     note: "Use lentils and spinach.",
@@ -122,7 +122,7 @@ export const mockLists = [
   {
     id: 13,
     title: "Hydration Challenge",
-    category: "HYDRATION",
+    category: "Hydration",
     time: "2025-05-26T09:00:00",
     description: "Complete 2 liters by noon.",
     note: "Use the water-tracking app.",
@@ -132,7 +132,7 @@ export const mockLists = [
   {
     id: 14,
     title: "Evening Reflection",
-    category: "EMOTIONAL_WELLNESS",
+    category: "Emotional Wellness",
     time: "2025-05-26T21:00:00",
     description: "Reflect on your emotions and journal.",
     note: "Focus on gratitude.",
@@ -142,7 +142,7 @@ export const mockLists = [
   {
     id: 15,
     title: "Home Spa Session",
-    category: "SELFCARE",
+    category: "Selfcare",
     time: "2025-05-27T20:00:00",
     description: "Take a long bath and do skincare.",
     note: null,
@@ -152,7 +152,7 @@ export const mockLists = [
   {
     id: 16,
     title: "Board Game Night",
-    category: "SOCIAL_WELLNESS",
+    category: "Social Wellness",
     time: "2025-05-28T19:30:00",
     description: "Play with friends or family.",
     note: "Bring snacks.",
@@ -162,7 +162,7 @@ export const mockLists = [
   {
     id: 17,
     title: "Therapy Appointment",
-    category: "STRESS_MANAGEMENT",
+    category: "Stress Management",
     time: "2025-05-28T11:00:00",
     description: "Monthly session with therapist.",
     note: "Review goals from last session.",
@@ -172,7 +172,7 @@ export const mockLists = [
   {
     id: 18,
     title: "Blood Pressure Check",
-    category: "MEDICAL_CHECKUPS",
+    category: "Medical Checkups",
     time: "2025-05-29T08:30:00",
     description: "Monitor blood pressure in the morning.",
     note: "Use home device.",
@@ -182,7 +182,7 @@ export const mockLists = [
   {
     id: 19,
     title: "Digital Detox",
-    category: "HEALTH",
+    category: "Health",
     time: "2025-05-20T18:00:00",
     description: "No screens for 3 hours before bed.",
     note: "Read a book instead.",
@@ -191,8 +191,48 @@ export const mockLists = [
   },
   {
     id: 20,
+    title: "Digital Detox",
+    category: "Health",
+    time: "2025-05-20T18:00:00",
+    description: "No screens for 3 hours before bed.",
+    note: "Read a book instead.",
+    is_complete: true,
+    user_id: 1,
+  },
+  {
+    id: 21,
+    title: "Digital Detox",
+    category: "Health",
+    time: "2025-05-20T18:00:00",
+    description: "No screens for 3 hours before bed.",
+    note: "Read a book instead.",
+    is_complete: false,
+    user_id: 1,
+  },
+  {
+    id: 22,
+    title: "Digital Detox",
+    category: "Stress Management",
+    time: "2025-05-20T18:00:00",
+    description: "No screens for 3 hours before bed.",
+    note: "Read a book instead.",
+    is_complete: false,
+    user_id: 1,
+  },
+  {
+    id: 23,
+    title: "Digital Detox",
+    category: "Health",
+    time: "2025-05-20T18:00:00",
+    description: "No screens for 3 hours before bed.",
+    note: "Read a book instead.",
+    is_complete: true,
+    user_id: 1,
+  },
+  {
+    id: 24,
     title: "Practice a New Song",
-    category: "HOBBIES",
+    category: "Hobbies",
     time: "2025-05-19T16:30:00",
     description: "Learn a new piece on guitar.",
     note: "Focus on finger-picking.",
