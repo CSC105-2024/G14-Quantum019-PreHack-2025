@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import ActivityBox from "@/components/activity_box/ActivityBox";
+import WeeklyCalender from "@/components/calender/WeeklyCalender";
 
 const Home = () => {
   return (
@@ -17,26 +18,8 @@ const Home = () => {
           </div>
 
           <ActivityBox mode={"create"} text={"Add Activity"} />
-
-          {/* <Button
-            variant="primary"
-            onClick={() =>
-              openActivityModal(new Date().toISOString().split("T")[0])
-            }
-            className="mt-3 sm:mt-0"
-            //icon={<Plus size={18} className="mr-1" />}
-          >
-            Add Activity
-          </Button> */}
         </div>
-
-        {/* <WeeklyCalendar openActivityModal={openActivityModal} />
-
-        <ActivityModal
-          isOpen={isActivityModalOpen}
-          onClose={() => setIsActivityModalOpen(false)}
-          selectedDate={selectedDate}
-        /> */}
+        <WeeklyCalender />
       </main>
     </div>
   );

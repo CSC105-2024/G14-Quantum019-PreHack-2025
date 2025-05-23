@@ -29,9 +29,11 @@ const CalenderHeader = ({ currentDate, setCurrentDate }) => {
           variant="outline"
           size="sm"
           onClick={previousWeek}
-          icon={<ChevronLeft size={16} />}
           aria-label="Previous week"
-        />
+        >
+          <ChevronLeft size={16} />
+        </Button>
+
         <Button variant="outline" size="sm" onClick={today}>
           Today
         </Button>
@@ -39,9 +41,10 @@ const CalenderHeader = ({ currentDate, setCurrentDate }) => {
           variant="outline"
           size="sm"
           onClick={nextWeek}
-          icon={<ChevronRight size={16} />}
           aria-label="Next week"
-        />
+        >
+          <ChevronRight size={16} />
+        </Button>
       </div>
     </div>
   );
