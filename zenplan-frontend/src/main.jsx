@@ -2,11 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import SignUpPage from "./pages/signup-page/SignUpPage";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <App /> */}
-    <SignUpPage />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

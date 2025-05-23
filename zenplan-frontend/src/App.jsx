@@ -1,10 +1,18 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+import Home from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./components/layout/MainLayout";
 
 const App = () => {
   return (
-    <div>
-      <Button>Click me</Button>
+    <div className="min-h-screen bg-neutral-50 text-neutral-800 font-sans min-w-screen">
+      <Routes>
+        <Route path="/dashboard" element={<MainLayout />}>
+          <Route path="home" element={<Home />} />
+          {/* <Route path="/daily/:date" element={<DailyTasks />} />
+          <Route path="/settings" element={<Settings />} /> */}
+        </Route>
+      </Routes>
     </div>
   );
 };
