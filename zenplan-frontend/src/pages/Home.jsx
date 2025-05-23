@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
+import ActivityBox from "@/components/activity_box/ActivityBox";
 
 const Home = () => {
   return (
@@ -14,6 +15,8 @@ const Home = () => {
               Plan and track your wellness activities
             </p>
           </div>
+
+          <ActivityBox mode={"create"} text={"Add Activity"} />
 
           {/* <Button
             variant="primary"

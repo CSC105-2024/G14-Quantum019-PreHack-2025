@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Calendar, User, Settings, Menu, X } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const location = useLocation();
@@ -48,17 +49,17 @@ const Navbar = () => {
             >
               Profile & Stats
             </Link>
-            <button
+            <Button
               onClick={handleLogout}
               className="ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--color-secondary)]"
             >
               Logout
-            </button>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center">
-            <button
+            <Button
               onClick={() => setMenuOpen(!menuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-neutral-400 hover:text-neutral-500 hover:bg-neutral-100"
             >
@@ -67,7 +68,7 @@ const Navbar = () => {
               ) : (
                 <Menu className="block h-6 w-6" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
