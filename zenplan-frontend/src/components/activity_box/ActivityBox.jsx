@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import ActivityModel from "./ActivityModel";
 
-const ActivityBox = ({ mode, text }) => {
+const ActivityBox = ({ mode, text, value }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -43,7 +43,7 @@ const ActivityBox = ({ mode, text }) => {
             {mode === "create" ? "Add New Activity" : "Edit Activity"}
           </DialogTitle>
           <DialogDescription>
-            <ActivityModel setOpen={setOpen} />
+            <ActivityModel setOpen={setOpen} value={value} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
