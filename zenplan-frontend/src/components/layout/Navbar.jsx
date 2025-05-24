@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const isActive = (path) => {
     return location.pathname.startsWith(path)
-      ? "bg-primary-50 text-primary-600"
+      ? "bg-[var(--color-pale)] text-[var(--color-nav)]"
       : "text-neutral-600 hover:bg-neutral-100";
   };
 
@@ -34,9 +34,9 @@ const Navbar = () => {
           {/* Desktop navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
             <Link
-              to="/home"
+              to="/dashboard/home"
               className={`px-3 py-2 rounded-md text-sm font-medium ${isActive(
-                "/home"
+                "/dashboard/home"
               )}`}
             >
               Calendar
