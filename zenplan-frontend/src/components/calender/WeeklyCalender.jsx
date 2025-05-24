@@ -104,7 +104,11 @@ const WeeklyCalender = () => {
                 </div>
               </Link>
 
-              <ActivityBox text={"Add"} mode={"home"} />
+              <ActivityBox
+                text={"Add"}
+                mode={"home"}
+                value={{ time: day.toISOString() }}
+              />
             </div>
           );
         })}
