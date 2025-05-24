@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,7 +40,7 @@ const category = [
   "Social Wellness",
 ];
 
-const ActivityModel = ({ mode, setOpen }) => {
+const ActivityModel = ({ mode, setOpen, value }) => {
   const formSchema = z.object({
     title: z.string().nonempty("Title cannot be empty"),
     category: z.enum(category, {
@@ -72,6 +72,14 @@ const ActivityModel = ({ mode, setOpen }) => {
       note: "",
     },
   });
+
+  useEffect(() => {
+    if (value) {
+      form.reset({
+        time: value.time,
+      });
+    }
+  }, [value]);
 
   const onSubmit = (data) => {
     const test = new Date(data.time).toString();
