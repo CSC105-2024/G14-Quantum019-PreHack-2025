@@ -43,7 +43,6 @@ const SignUpPage = () => {
     } else {
       await registerUser(data.name, data.email, data.password);
     }
-    console.log("Form data: ", data);
   };
 
   return (
