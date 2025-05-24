@@ -72,7 +72,7 @@ const SignUpPage = () => {
           <FormInput
             label={"Email"}
             icon={<Mail size={18} />}
-            type={"email"}
+            type={"text"}
             placeholder={"Enter your email"}
             {...register("email")}
           />

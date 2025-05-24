@@ -19,7 +19,7 @@ const useLogin = () => {
       localStorage.setItem("zenplan_user", JSON.stringify(data.data));
 
       dispatch({ type: "LOGIN", payload: data.data });
-      navigate("/dashboard");
+      navigate("/dashboard/home");
     } catch (error) {
       console.error(error);
       setLoginError(error.response.data.msg);

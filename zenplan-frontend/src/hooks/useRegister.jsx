@@ -8,19 +8,16 @@ const useRegister = () => {
   const navigate = useNavigate();
 
   const registerUser = async (name, email, password) => {
-    console.log(name, email, password);
-    {
-      /*remove*/
-    }
     try {
       const { data } = await axiosInstance.post(
         "user/register",
         { name: name, email: email, password: password },
         { headers: { "Content-Type": "application/json" } }
       );
-      {
-        /*add timeout*/
-      }
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
     } catch (error) {
       console.log(error);
       setRegisterError(error.response.data.msg);
