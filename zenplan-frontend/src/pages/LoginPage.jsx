@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import FormInput from "@/components/ui/FormInput";
 import useLogin from "@/hooks/useLogin";
 import { Leaf, Lock, Mail } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { login, loginError, setLoginError } = useLogin();
 
   const loginSchema = z.object({
@@ -62,8 +64,12 @@ const LoginPage = () => {
           <FormInput
             label={"Password"}
             icon={<Lock size={18} />}
-            type={"password"}
+            type={showPassword ? "text" : "password"}
             placeholder={"Enter your password"}
+            toggleIcon={showPassword ? faEye : faEyeSlash}
+            onToggle={() => {
+              setShowPassword(!showPassword);
+            }}
             {...register("password")}
           />
           {errors.password && (

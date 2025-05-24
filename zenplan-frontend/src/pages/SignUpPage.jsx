@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Leaf, Lock, Mail, User } from "lucide-react";
 import FormInput from "@/components/ui/FormInput";
@@ -9,9 +10,7 @@ import { useForm } from "react-hook-form";
 import useRegister from "@/hooks/useRegister";
 
 const SignUpPage = () => {
-  {
-    /*add show pass*/
-  }
+  const [showPassword, setShowPassword] = useState(false);
   const { registerUser, registerError, setRegisterError } = useRegister();
 
   const signupSchema = z.object({
@@ -85,8 +84,12 @@ const SignUpPage = () => {
           <FormInput
             label={"Password"}
             icon={<Lock size={18} />}
-            type={"password"}
+            type={showPassword ? "text" : "password"}
             placeholder={"Enter your password"}
+            toggleIcon={showPassword ? faEye : faEyeSlash}
+            onToggle={() => {
+              setShowPassword(!showPassword);
+            }}
             {...register("password")}
           />
           {errors.password && (
@@ -98,8 +101,12 @@ const SignUpPage = () => {
           <FormInput
             label={"Confirm Password"}
             icon={<Lock size={18} />}
-            type={"password"}
+            type={showPassword ? "text" : "password"}
             placeholder={"Re-enter your password"}
+            toggleIcon={showPassword ? faEye : faEyeSlash}
+            onToggle={() => {
+              setShowPassword(!showPassword);
+            }}
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (
