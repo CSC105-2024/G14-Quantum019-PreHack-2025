@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus, PlusCircle } from "lucide-react";
+import { Plus, PlusCircle, Edit } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import ActivityModel from "./ActivityModel";
@@ -17,7 +17,17 @@ const ActivityBox = ({ mode, text, value }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {/* TODO: need to fix this */}
-      {mode !== "home" ? (
+
+      {mode === "edit" ? (
+        <Button
+          onClick={() => setOpen(true)}
+          className={
+            "bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] mt-3 md:mt-0"
+          }
+        >
+          <Edit />
+        </Button>
+      ) : mode !== "home" ? (
         <Button
           onClick={() => setOpen(true)}
           className={
