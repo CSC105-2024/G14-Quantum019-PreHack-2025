@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import useRegister from "@/hooks/useRegister";
 
 const SignUpPage = () => {
+  {
+    /*add show pass*/
+  }
   const { registerUser, registerError, setRegisterError } = useRegister();
 
   const signupSchema = z.object({
@@ -48,7 +51,7 @@ const SignUpPage = () => {
     <div className="flex justify-center items-center min-h-screen min-w-screen bg-neutral-50 p-4">
       <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-8">
         <div className="flex flex-col items-center mb-8">
-          <div className="p-3 bg-muted rounded-full mb-4">
+          <div className="p-3 bg-[var(--color-background)] rounded-full mb-4">
             <Leaf className="h-8 w-8 text-primary-500" />
           </div>
           <h1 className="!text-2xl font-semibold text-neutral-800">
@@ -114,22 +117,34 @@ const SignUpPage = () => {
             />
             <label className="ml-2 block text-sm text-neutral-700">
               I agree to the{" "}
-              <a
-                href="#"
-                className="!text-[var(--secondary)] hover:text-primary-600"
+              <Link
+                to="/"
+                className="text-[var(--color-secondary)] hover:text-primary-600 font-medium underline underline-offset-4"
               >
+                {" "}
+                {/*terms of service */}
                 Terms of Service
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a
-                href="#"
-                className="!text-[var(--secondary)] hover:text-primary-600"
+              <Link
+                to="/"
+                className="text-[var(--color-secondary)] hover:text-primary-600 font-medium underline underline-offset-4"
               >
+                {" "}
+                {/*Privacy policy*/}
                 Privacy Policy
-              </a>
+              </Link>
             </label>
           </div>
-          <Button className="text-base !bg-primary w-full" variant="default">
+          {registerError && (
+            <p className="text-red-500 text-md text-center my-3">
+              {registerError}
+            </p>
+          )}
+          <Button
+            className="text-base bg-[var(--color-primary)] w-full cursor-pointer hover:bg-[var(--color-secondary)]"
+            variant="default"
+          >
             Create Account
           </Button>
         </form>
@@ -137,13 +152,12 @@ const SignUpPage = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-neutral-600">
             Already have an account?{" "}
-            <a
-              href="#"
-              className="!text-[var(--secondary)] hover:text-primary-600 font-medium"
+            <Link
+              to="/login"
+              className="text-[var(--color-secondary)] hover:text-primary-600 font-medium underline underline-offset-4"
             >
               Sign in
-            </a>{" "}
-            {/*change to Link later */}
+            </Link>
           </p>
         </div>
       </div>
