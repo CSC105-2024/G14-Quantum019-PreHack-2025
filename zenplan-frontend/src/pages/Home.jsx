@@ -1,6 +1,5 @@
 import React from "react";
-import Navbar from "@/components/layout/Navbar";
-import ActivityBox from "@/components/activity_box/ActivityBox";
+import ActivityBox from "@/components/activities/ActivityBox";
 import WeeklyCalender from "@/components/calender/WeeklyCalender";
 
 const Home = () => {

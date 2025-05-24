@@ -13,6 +13,7 @@
   --color-error: #ef4444; /* Bright red for errors */
   --color-alert: #a12719; /* Deep red for warnings/alerts */
   --color-muted: #ffe4df; /* Soft peach for muted UI or backgrounds */
+  --color-pale: #f0f9f1;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

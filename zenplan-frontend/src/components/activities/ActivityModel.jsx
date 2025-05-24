@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,7 +40,7 @@ const category = [
   "Social Wellness",
 ];
 
-const ActivityModel = ({ mode, setOpen }) => {
+const ActivityModel = ({ mode, setOpen, oldForm }) => {
   const formSchema = z.object({
     title: z.string().nonempty("Title cannot be empty"),
     category: z.enum(category, {
@@ -66,16 +66,33 @@ const ActivityModel = ({ mode, setOpen }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      category: "",
+      category: oldForm.category || "", //Might cause an error
       time: new Date().toISOString(),
       description: "",
       note: "",
     },
   });
 
+  useEffect(() => {
+    if (oldForm && oldForm.category) {
+      form.reset({
+        title: oldForm.title,
+        category: oldForm.category,
+        time: oldForm.time,
+        description: oldForm.description,
+        note: oldForm.note,
+      });
+    }
+  }, [oldForm]);
+
   const onSubmit = (data) => {
-    const test = new Date(data.time).toString();
-    console.log(test);
+    if (mode === "edit") {
+      console.log("ok");
+      console.log(data);
+    } else {
+      const test = new Date(data.time).toString();
+      console.log(test);
+    }
   };
 
   return (
@@ -106,7 +123,7 @@ const ActivityModel = ({ mode, setOpen }) => {
               <FormItem>
                 <FormLabel>Category</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger className={"w-full text-black"}>
                       <SelectValue placeholder="Select a Category" />
                     </SelectTrigger>

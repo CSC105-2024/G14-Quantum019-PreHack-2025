@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { format, addDays, startOfWeek, isSameDay } from "date-fns";
 import CalenderHeader from "./CalenderHeader";
 import { Link } from "react-router-dom";
 import { mockLists } from "@/mocklist";
 import { PlusCircle, CheckCircle } from "lucide-react";
-import ActivityBox from "../activity_box/ActivityBox";
-
-const categoryColors = {
-  Nutrition: "bg-orange-100 text-orange-900 border-orange-200", // warm, but distinct from greens
-  Selfcare: "bg-fuchsia-100 text-fuchsia-900 border-fuchsia-200", // vibrant and distinct
-  Exercise: "bg-sky-100 text-sky-900 border-sky-200", // lighter than your nav green
-  Hobbies: "bg-amber-100 text-amber-900 border-amber-200", // different from green/yellow
-  "Stress Management": "bg-violet-100 text-violet-900 border-violet-200", // richer purple tone
-  "Medical Checkups": "bg-slate-100 text-slate-900 border-slate-200", // neutral and clinical
-  Hydration: "bg-teal-100 text-teal-900 border-teal-200", // blue-green, avoiding your mint
-  Health: "bg-lime-100 text-lime-900 border-lime-200", // fresher tone, away from emerald
-  "Emotional Wellness": "bg-rose-100 text-rose-900 border-rose-200", // close to red but muted
-  "Social Wellness": "bg-indigo-100 text-indigo-900 border-indigo-200", // social and calm
-};
+import ActivityBox from "../activities/ActivityBox";
+import { categoryColors } from "@/constants/categoryColors";
 
 const WeeklyCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -32,8 +20,6 @@ const WeeklyCalender = () => {
     );
     return acc;
   }, {});
-
-  console.log(lists);
 
   return (
     <div className="mb-8">
@@ -72,14 +58,18 @@ const WeeklyCalender = () => {
               >
                 <div>{format(day, "d")}</div>
               </div>
-              <Link to={`/daily/${dateFormatted}`} className="block p-1">
+              <Link
+                to={`/dashboard/daily/${dateFormatted}`}
+                className="block p-1"
+              >
                 <div className="max-h-[100px] overflow-y-auto">
                   {daily.slice(0, 3).map((list) => (
                     <div
                       key={list.id}
                       className={`text-xs p-1 mb-1 rounded border flex items-center justify-between  hover:border-[var(--color-nav)] ${
                         categoryColors[list.category]
-                      } ${list.is_complete ? "line-through" : ""}`}
+                      }
+                      ${list.is_complete ? "line-through" : ""}`}
                     >
                       <span className="truncate flex-1">{list.title}</span>
                       <button
@@ -104,7 +94,11 @@ const WeeklyCalender = () => {
                 </div>
               </Link>
 
-              <ActivityBox text={"Add"} mode={"home"} />
+              <ActivityBox
+                text={"Add"}
+                mode={"home"}
+                value={{ time: day.toISOString() }}
+              />
             </div>
           );
         })}

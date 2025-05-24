@@ -77,7 +77,7 @@ const SignUpPage = () => {
             {...register("email")}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mb-1">{errors.email.message}</p>
+            <p className="text-red-500 text-sm mb-3">{errors.email.message}</p>
           )}
 
           <FormInput
@@ -92,7 +92,7 @@ const SignUpPage = () => {
             {...register("password")}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mb-1">
+            <p className="text-red-500 text-sm mb-3">
               {errors.password.message}
             </p>
           )}
@@ -109,46 +109,18 @@ const SignUpPage = () => {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (
-            <p className="text-red-500 text-sm mb-1">
+            <p className="text-red-500 text-sm mb-3">
               {errors.confirmPassword.message}
             </p>
           )}
 
-          <div className="mt-2 mb-6 flex justify-center items-center">
-            <input
-              name="terms"
-              type="checkbox"
-              className="h-4 w-4 text-primary-500 focus:ring-primary-400 border-neutral-300 rounded"
-              required
-            />
-            <label className="ml-2 block text-sm text-neutral-700">
-              I agree to the{" "}
-              <Link
-                to="/"
-                className="text-[var(--color-secondary)] hover:text-primary-600 font-medium underline underline-offset-4"
-              >
-                {" "}
-                {/*terms of service */}
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link
-                to="/"
-                className="text-[var(--color-secondary)] hover:text-primary-600 font-medium underline underline-offset-4"
-              >
-                {" "}
-                {/*Privacy policy*/}
-                Privacy Policy
-              </Link>
-            </label>
-          </div>
           {registerError && (
-            <p className="text-red-500 text-md text-center my-3">
+            <p className="text-red-500 text-md text-center my-1">
               {registerError}
             </p>
           )}
           <Button
-            className="text-base bg-[var(--color-primary)] w-full cursor-pointer hover:bg-[var(--color-secondary)]"
+            className="text-base bg-[var(--color-primary)] w-full cursor-pointer hover:bg-[var(--color-secondary)] mt-2"
             variant="default"
           >
             Create Account

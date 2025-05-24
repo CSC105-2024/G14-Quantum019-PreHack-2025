@@ -58,7 +58,7 @@ const LoginPage = () => {
             {...register("email")}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mb-1">{errors.email.message}</p>
+            <p className="text-red-500 text-sm mb-3">{errors.email.message}</p>
           )}
 
           <FormInput
@@ -73,7 +73,7 @@ const LoginPage = () => {
             {...register("password")}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mb-1">
+            <p className="text-red-500 text-sm mb-3">
               {errors.password.message}
             </p>
           )}
