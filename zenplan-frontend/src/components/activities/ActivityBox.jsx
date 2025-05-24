@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import ActivityModel from "./ActivityModel";
 
-const ActivityBox = ({ mode, text, value }) => {
+const ActivityBox = ({ mode, text, oldForm }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -22,7 +22,7 @@ const ActivityBox = ({ mode, text, value }) => {
         <Button
           onClick={() => setOpen(true)}
           className={
-            "bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] mt-3 md:mt-0"
+            "text-black bg-white hover:bg-white shadow-none  mt-3 md:mt-0 hover:text-[var(--color-nav)]"
           }
         >
           <Edit />
@@ -53,7 +53,7 @@ const ActivityBox = ({ mode, text, value }) => {
             {mode === "create" ? "Add New Activity" : "Edit Activity"}
           </DialogTitle>
           <DialogDescription>
-            <ActivityModel setOpen={setOpen} value={value} />
+            <ActivityModel setOpen={setOpen} oldForm={oldForm} mode={mode} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

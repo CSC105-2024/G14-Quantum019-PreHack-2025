@@ -3,6 +3,8 @@ import React from "react";
 import { Trash2, CheckCircle, Clock, Tag } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "../ui/button";
+import AlertBox from "../alert_box/AlertBox";
+import ActivityBox from "./ActivityBox";
 
 const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
   if (lists.length === 0) {
@@ -109,14 +111,15 @@ const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
               >
                 <Trash2 size={16} />
               </Button> */}
-              <Button
+              <ActivityBox mode={"edit"} oldForm={list} />
+              <AlertBox
+                icon={Trash2}
+                title={"Are you sure you want to delete this?"}
                 onClick={() => onDeleteList(list.id)}
-                className={
+                css={
                   "bg-white shadow-none text-black hover:bg-white hover:text-[var(--color-nav)]"
                 }
-              >
-                <Trash2 size={16} />
-              </Button>
+              />
             </div>
           </div>
         </div>
