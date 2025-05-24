@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
+import DailyTasks from "./pages/DailyTasks";
 
 const App = () => {
   return (
@@ -9,8 +10,8 @@ const App = () => {
       <Routes>
         <Route path="/dashboard" element={<MainLayout />}>
           <Route path="home" element={<Home />} />
-          {/* <Route path="/daily/:date" element={<DailyTasks />} />
-          <Route path="/settings" element={<Settings />} /> */}
+          <Route path="daily/:date" element={<DailyTasks />} />
+          {/* <Route path="/settings" element={<Settings />} /> */}
         </Route>
       </Routes>
     </div>
