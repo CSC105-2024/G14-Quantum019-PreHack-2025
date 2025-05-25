@@ -68,7 +68,7 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
     defaultValues: {
       title: "",
       category: mode === "edit" ? oldForm.category || "" : "", //Might cause an error
-      time: new Date().toISOString(),
+      time: oldForm ? oldForm?.time : new Date().toISOString(),
       description: "",
       note: "",
     },
@@ -94,6 +94,7 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
         //await edit(form, oldForm);
       } else {
         await createList(data);
+        console.log(data.time);
       }
     };
 
@@ -171,7 +172,10 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
                 return (
                   <DatePicker
                     selected={new Date(field.value)}
-                    onChange={(date) => field.onChange(date)}
+                    onChange={(date) => {
+                      console.log(date);
+                      field.onChange(date.toISOString());
+                    }}
                     showTimeSelect
                     timeFormat="HH:mm" // 24-hour format here
                     timeIntervals={15} // 15-minute steps
