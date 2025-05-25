@@ -1,3 +1,4 @@
+import type { $Enums } from "../generated/prisma/index.js";
 import { db } from "../index.ts";
 import type { IdPair, List } from "../types/types.ts";
 import { Prisma } from "@prisma/client";
@@ -22,11 +23,15 @@ export const getLists = async (
 };
 
 export const createList = async (list: List, user_id: number) => {
+  const category = list.category.includes(" ")
+    ? (list.category.replace(" ", "_") as $Enums.Category)
+    : list.category;
+
   try {
     const createdList = await db.list.create({
       data: {
         title: list.title,
-        category: list.category,
+        category: category,
         time: list.time,
         description: list.description,
         note: list.note,

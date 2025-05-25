@@ -3,8 +3,7 @@ import * as ListModel from "../../../models/list.model.ts";
 import { db } from "../../../index.ts";
 
 const getLists = async (c: Context) => {
-  //TODO:Temp
-  const user_id = 1;
+  const user_id = c.get("user_id");
 
   try {
     const lists = await ListModel.getLists(user_id, "def", db);

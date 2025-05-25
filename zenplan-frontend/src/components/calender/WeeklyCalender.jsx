@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { format, addDays, startOfWeek, isSameDay } from "date-fns";
 import CalenderHeader from "./CalenderHeader";
 import { Link } from "react-router-dom";
-import { mockLists } from "@/mocklist";
 import { PlusCircle, CheckCircle } from "lucide-react";
 import ActivityBox from "../activities/ActivityBox";
 import { categoryColors } from "@/constants/categoryColors";
+import { useDataContext } from "@/hooks/useDataContext";
 
 const WeeklyCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const weekStart = startOfWeek(currentDate);
+  const { data } = useDataContext();
 
   const days = Array.from({ length: 7 }).map((_, i) => addDays(weekStart, i));
 
   const lists = days.reduce((acc, day) => {
     const dateKey = format(day, "yyyy-MM-dd");
-    acc[dateKey] = mockLists.filter(
+    acc[dateKey] = data.filter(
       (list) => format(list.time, "yyyy-MM-dd") === dateKey
     );
     return acc;

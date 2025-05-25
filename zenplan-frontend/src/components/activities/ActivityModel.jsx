@@ -21,11 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // import styles
 import { Controller } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
+import { useCreate } from "@/hooks/useCreate";
+import { toast } from "sonner";
 
 const category = [
   "Nutrition",
@@ -66,12 +67,14 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      category: oldForm.category || "", //Might cause an error
+      category: mode === "edit" ? oldForm.category || "" : "", //Might cause an error
       time: new Date().toISOString(),
       description: "",
       note: "",
     },
   });
+
+  const { createList } = useCreate();
 
   useEffect(() => {
     if (oldForm && oldForm.category) {
@@ -86,13 +89,26 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
   }, [oldForm]);
 
   const onSubmit = (data) => {
-    if (mode === "edit") {
-      console.log("ok");
-      console.log(data);
-    } else {
-      const test = new Date(data.time).toString();
-      console.log(test);
-    }
+    const promise = async () => {
+      if (mode === "edit") {
+        //await edit(form, oldForm);
+      } else {
+        await createList(data);
+      }
+    };
+
+    setOpen(false);
+
+    toast.promise(promise(), {
+      //promise is not a func
+      loading: oldForm ? "Updataing..." : "Creating...",
+      success: (data) => {
+        return oldForm
+          ? "You list has been updated"
+          : "New list has been created";
+      },
+      error: "Error",
+    });
   };
 
   return (

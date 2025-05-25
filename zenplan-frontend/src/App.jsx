@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import { useAuthContext } from "./hooks/useAuthContext";
 import DailyTasks from "./pages/DailyTasks";
 import Settings from "./pages/Settings";
+import { Toaster } from "sonner";
 
 const App = () => {
   const { user, dispatch, loading } = useAuthContext();
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
+      <Toaster richColors />
     </div>
   );
 };

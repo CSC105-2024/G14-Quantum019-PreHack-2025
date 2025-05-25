@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { completeAll } from "./complete.service.ts";
 
 const completeLists = async (c: Context) => {
-  const user_id = 1; //TODO: temp
+  const user_id = c.get("user_id");
 
   try {
     const lists = await completeAll(user_id);

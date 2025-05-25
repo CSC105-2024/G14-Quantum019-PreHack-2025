@@ -3,7 +3,7 @@ import { toggle } from "./toggle.service.ts";
 
 const toggleList = async (c: Context) => {
   const id = parseInt(c.req.param("id"));
-  const user_id = 1; //TODO: fake
+  const user_id = c.get("user_id");
 
   try {
     const toggeled = await toggle({ id, user_id });

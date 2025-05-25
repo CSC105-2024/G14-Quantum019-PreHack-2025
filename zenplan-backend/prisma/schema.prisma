@@ -44,14 +44,14 @@ model List {
 
 
 enum Category {
-  NUTRITION_AND_DIET
-  SELF_CARE_AND_LIFESTYLE
-  EXERCISE_AND_MOVEMENT
-  HOBBIES_AND_RELAXATION
-  STRESS_MANAGEMENT
-  MEDICAL_CHECKUPS
-  HYDRATION
-  PREVENTIVE_HEALTH
-  MENTAL_AND_EMOTIONAL_WELLNESS
-  RELATIONSHIP_AND_SOCIAL_WELLNESS
+Nutrition  
+Selfcare  
+Exercise  
+Hobbies  
+Stress_Management  
+Medical_Checkups  
+Hydration  
+Health  
+Emotional_Wellness  
+Social_Wellness
 }
