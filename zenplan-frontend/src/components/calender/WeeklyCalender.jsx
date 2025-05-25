@@ -6,11 +6,14 @@ import { PlusCircle, CheckCircle } from "lucide-react";
 import ActivityBox from "../activities/ActivityBox";
 import { categoryColors } from "@/constants/categoryColors";
 import { useDataContext } from "@/hooks/useDataContext";
+import { useToggleList } from "@/hooks/useToggleList";
 
 const WeeklyCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const weekStart = startOfWeek(currentDate);
   const { data } = useDataContext();
+
+  const { toggleList } = useToggleList();
 
   const days = Array.from({ length: 7 }).map((_, i) => addDays(weekStart, i));
 
@@ -21,6 +24,10 @@ const WeeklyCalender = () => {
     );
     return acc;
   }, {});
+
+  const toggleCompletion = async (id) => {
+    await toggleList(id);
+  };
 
   return (
     <div className="mb-8">
@@ -76,7 +83,7 @@ const WeeklyCalender = () => {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          toggleCompletion(activity.id);
+                          toggleCompletion(list.id);
                         }}
                         className="flex-shrink-0 ml-1"
                       >
@@ -98,7 +105,7 @@ const WeeklyCalender = () => {
               <ActivityBox
                 text={"Add"}
                 mode={"home"}
-                value={{ time: day.toISOString() }}
+                oldForm={{ time: day.toISOString() }}
               />
             </div>
           );
