@@ -11,6 +11,8 @@ import { Toaster } from "sonner";
 import { useDataContext } from "./hooks/useDataContext";
 import { useEffect } from "react";
 import { useFetch } from "./hooks/useFetch";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import RedirectIfAuthenticated from "./routes/ RedirectIfAuthenticated";
 
 const App = () => {
   const { user, dispatch, loading } = useAuthContext();
@@ -22,18 +24,12 @@ const App = () => {
       const lists = await fetchLists();
       setData(lists);
     };
+    if (user) {
+      func();
+    }
+  }, [user]);
 
-    func();
-  }, []);
-
-  if (loading)
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-10 h-10 border-4 border-[var(--color-nav)] border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-
-  if (!data)
+  if (loading || (user && !data))
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="w-10 h-10 border-4 border-[var(--color-nav)] border-t-transparent rounded-full animate-spin"></div>
@@ -44,12 +40,28 @@ const App = () => {
     <div className="min-h-screen bg-neutral-50 text-neutral-800 font-sans min-w-screen">
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/dashboard" element={<MainLayout />}>
-          <Route path="home" element={<Home />} />
-          <Route path="daily/:date" element={<DailyTasks />} />
-          <Route path="settings" element={<Settings />} />
+        <Route
+          path="/login"
+          element={
+            <RedirectIfAuthenticated>
+              <LoginPage />
+            </RedirectIfAuthenticated>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <RedirectIfAuthenticated>
+              <SignUpPage />
+            </RedirectIfAuthenticated>
+          }
+        />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<MainLayout />}>
+            <Route path="home" element={<Home />} />
+            <Route path="daily/:date" element={<DailyTasks />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
         </Route>
       </Routes>
       <Toaster richColors />

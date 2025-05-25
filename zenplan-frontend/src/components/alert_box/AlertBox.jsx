@@ -19,7 +19,7 @@ const AlertBox = ({ btnName, css, title, onClick }) => {
     <AlertDialog>
       <AlertDialogTrigger>
         <Button className={`bg-[var(--primary-color)] ${css}`}>
-          {!btnName ? <Trash2 size={16} /> : { btnName }}
+          {!btnName ? <Trash2 size={16} /> : btnName}
         </Button>
       </AlertDialogTrigger>
 

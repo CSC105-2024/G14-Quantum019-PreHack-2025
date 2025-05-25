@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Calendar, User, Settings, Menu, X } from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
+import AlertBox from "../alert_box/AlertBox";
+import { useLogout } from "@/hooks/useLogout";
 
 const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const { logout } = useLogout();
 
-  const handleLogout = () => {
-    navigate("/login");
+  const handleLogout = async () => {
+    await logout();
   };
 
   const isActive = (path) => {
@@ -49,12 +51,14 @@ const Navbar = () => {
             >
               Profile & Stats
             </Link>
-            <Button
+            <AlertBox
+              btnName={"Log out"}
+              css={
+                "ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--color-secondary)]"
+              }
+              title={"Are you sure you want to log out?"}
               onClick={handleLogout}
-              className="ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--color-secondary)]"
-            >
-              Logout
-            </Button>
+            />
           </div>
 
           {/* Mobile menu button */}
