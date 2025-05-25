@@ -26,8 +26,8 @@ const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
         <div
           key={list.id}
           className={`bg-white rounded-lg shadow-sm border p-4 transition-all ${
-            list.is_completed
-              ? "border-neutral-200 opacity-70"
+            list.is_complete
+              ? "border-neutral-200 opacity-70 "
               : "border-l-4 border-l-primary-400"
           }`}
         >
@@ -72,7 +72,9 @@ const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
                     }`}
                   >
                     <Tag size={12} className="mr-1" />
-                    {list.category}
+                    {list.category.includes("_")
+                      ? list.category.replace("_", " ")
+                      : list.category}
                   </span>
 
                   {list.time && (

@@ -2,6 +2,7 @@ import type { $Enums } from "../generated/prisma/index.js";
 import { db } from "../index.ts";
 import type { IdPair, List } from "../types/types.ts";
 import { Prisma } from "@prisma/client";
+import { converter } from "../utils/functions.ts";
 
 export const getLists = async (
   user_id: number,
@@ -23,9 +24,7 @@ export const getLists = async (
 };
 
 export const createList = async (list: List, user_id: number) => {
-  const category = list.category.includes(" ")
-    ? (list.category.replace(" ", "_") as $Enums.Category)
-    : list.category;
+  const category = converter(list.category) as $Enums.Category;
 
   try {
     const createdList = await db.list.create({
@@ -46,19 +45,21 @@ export const createList = async (list: List, user_id: number) => {
 };
 
 export const editList = async (list: List, pair: IdPair) => {
+  const category = converter(list.category) as $Enums.Category;
+
   try {
     const editedList = await db.list.upsert({
       where: { id: pair.id, user_id: pair.user_id },
       update: {
         title: list.title,
-        category: list.category,
+        category: category,
         time: list.time,
         description: list.description,
         note: list.note,
       },
       create: {
         title: list.title,
-        category: list.category,
+        category: category,
         time: list.time,
         description: list.description,
         note: list.note,

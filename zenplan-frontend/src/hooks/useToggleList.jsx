@@ -10,11 +10,11 @@ export const useToggleList = () => {
     try {
       const { data } = await axiosInstance.patch(`/list/toggle/${id}`);
 
-      setData((d) => {
-        const index = d.findIndex((list) => list.id === data.data.id);
-        if (index === -1) return [...d, data.data];
+      setData((prevData) => {
+        const index = prevData.findIndex((list) => list.id === data.data.id);
+        if (index === -1) return [...prevData, data.data];
 
-        const updated = [...d];
+        const updated = [...prevData];
         updated[index] = data.data;
         return updated;
       });

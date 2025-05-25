@@ -27,6 +27,7 @@ import { Controller } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreate } from "@/hooks/useCreate";
 import { toast } from "sonner";
+import { useEdit } from "@/hooks/useEdit";
 
 const category = [
   "Nutrition",
@@ -42,6 +43,13 @@ const category = [
 ];
 
 const ActivityModel = ({ mode, setOpen, oldForm }) => {
+  const { createList } = useCreate();
+  const { editList } = useEdit();
+
+  const cate = oldForm?.category.includes("_")
+    ? oldForm.category.replace("_", " ")
+    : oldForm.category;
+
   const formSchema = z.object({
     title: z.string().nonempty("Title cannot be empty"),
     category: z.enum(category, {
@@ -67,20 +75,18 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      category: mode === "edit" ? oldForm.category || "" : "", //Might cause an error
+      category: mode === "edit" ? cate || "" : "", //Might cause an error
       time: oldForm ? oldForm?.time : new Date().toISOString(),
       description: "",
       note: "",
     },
   });
 
-  const { createList } = useCreate();
-
   useEffect(() => {
     if (oldForm && oldForm.category) {
       form.reset({
         title: oldForm.title,
-        category: oldForm.category,
+        category: cate,
         time: oldForm.time,
         description: oldForm.description,
         note: oldForm.note,
@@ -91,10 +97,9 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
   const onSubmit = (data) => {
     const promise = async () => {
       if (mode === "edit") {
-        //await edit(form, oldForm);
+        await editList(data, oldForm, oldForm.id);
       } else {
         await createList(data);
-        console.log(data.time);
       }
     };
 
@@ -108,7 +113,7 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
           ? "You list has been updated"
           : "New list has been created";
       },
-      error: "Error",
+      error: (err) => err.message,
     });
   };
 
