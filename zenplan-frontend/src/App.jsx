@@ -22,7 +22,6 @@ const App = () => {
   useEffect(() => {
     const func = async () => {
       const lists = await fetchLists();
-      setData(lists);
     };
     if (user) {
       func();

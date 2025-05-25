@@ -48,9 +48,7 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
 
   let cate;
   if (oldForm) {
-    cate = oldForm?.category?.includes("_")
-      ? oldForm?.category.replace("_", " ")
-      : oldForm?.category;
+    cate = oldForm?.category?.replace(/_/g, " ");
   }
 
   const formSchema = z.object({

@@ -13,9 +13,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertBox from "@/components/alert_box/AlertBox";
+import StatisticsCards from "@/components/stats/StatisticsCards";
+import CategoryProgress from "@/components/stats/CategoryProgress";
+import { useDataContext } from "@/hooks/useDataContext";
+import { useGetUserStats } from "@/hooks/useGetUserStats";
 
 const Settings = () => {
   const { user } = useAuthContext();
+  const { data } = useDataContext();
+  const stats = useGetUserStats(data);
 
   const formSchema = z.object({
     name: z.string(),
@@ -55,6 +61,10 @@ const Settings = () => {
 
   const onSubmitPassword = async (data) => {
     console.log(data);
+  };
+
+  const handleLogout = async () => {
+    console.log("ok");
   };
 
   return (
@@ -196,9 +206,7 @@ const Settings = () => {
                     btnName={"Update Password"}
                     title={"Are you sure you want to update your password?"}
                     onClick={formPassword.handleSubmit(onSubmitPassword)}
-                    css={
-                      "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] flex"
-                    }
+                    css={"flex"}
                   />
                 </form>
               </Form>
@@ -208,6 +216,16 @@ const Settings = () => {
               <h2 className="text-lg font-medium text-neutral-800 mb-4">
                 Account Actions
               </h2>
+              <div className="flex justify-center">
+                <AlertBox
+                  btnName={"Logout"}
+                  title={"Are you sure you want to log out?"}
+                  onClick={handleLogout}
+                  css={
+                    "px-32 bg-white border border-[var(--color-error)] text-black hover:bg-white border hover:border-[var(--color-primary)]"
+                  }
+                />
+              </div>
             </div>
           </div>
 
@@ -216,8 +234,8 @@ const Settings = () => {
               Activity Statistics
             </h2>
 
-            {/* <StatisticsCards stats={stats} />
-            <CategoryProgress stats={stats} /> */}
+            <StatisticsCards stats={stats} />
+            <CategoryProgress stats={stats} />
           </div>
         </div>
       </main>

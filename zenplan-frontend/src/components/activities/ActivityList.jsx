@@ -2,7 +2,6 @@ import { categoryColors } from "@/constants/categoryColors";
 import React from "react";
 import { Trash2, CheckCircle, Clock, Tag } from "lucide-react";
 import { format } from "date-fns";
-import { Button } from "../ui/button";
 import AlertBox from "../alert_box/AlertBox";
 import ActivityBox from "./ActivityBox";
 
@@ -72,9 +71,7 @@ const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
                     }`}
                   >
                     <Tag size={12} className="mr-1" />
-                    {list.category.includes("_")
-                      ? list.category.replace("_", " ")
-                      : list.category}
+                    {list.category.replace(/_/g, " ")}
                   </span>
 
                   {list.time && (

@@ -2,25 +2,55 @@ import React from "react";
 
 // Category color mapping
 const categoryColors = {
-  Physical: {
-    bg: "bg-blue-100",
-    text: "text-blue-800",
-    fill: "bg-blue-500",
-  },
   Nutrition: {
-    bg: "bg-green-100",
-    text: "text-green-800",
-    fill: "bg-green-500",
+    bg: "bg-orange-100",
+    text: "text-orange-900",
+    fill: "bg-orange-200",
   },
-  "Self-care": {
-    bg: "bg-accent-100",
-    text: "text-accent-800",
-    fill: "bg-accent-500",
+  Selfcare: {
+    bg: "bg-fuchsia-100",
+    text: "text-fuchsia-900",
+    fill: "bg-fuchsia-200",
   },
-  Medical: {
-    bg: "bg-red-100",
-    text: "text-red-800",
-    fill: "bg-red-500",
+  Exercise: {
+    bg: "bg-sky-100",
+    text: "text-sky-900",
+    fill: "bg-sky-200",
+  },
+  Hobbies: {
+    bg: "bg-amber-100",
+    text: "text-amber-900",
+    fill: "bg-amber-200",
+  },
+  "Stress Management": {
+    bg: "bg-violet-100",
+    text: "text-violet-900",
+    fill: "bg-violet-200",
+  },
+  "Medical Checkups": {
+    bg: "bg-slate-100",
+    text: "text-slate-900",
+    fill: "bg-slate-200",
+  },
+  Hydration: {
+    bg: "bg-teal-100",
+    text: "text-teal-900",
+    fill: "bg-teal-200",
+  },
+  Health: {
+    bg: "bg-lime-100",
+    text: "text-lime-900",
+    fill: "bg-lime-200",
+  },
+  "Emotional Wellness": {
+    bg: "bg-rose-100",
+    text: "text-rose-900",
+    fill: "bg-rose-200",
+  },
+  "Social Wellness": {
+    bg: "bg-indigo-100",
+    text: "text-indigo-900",
+    fill: "bg-indigo-200",
   },
 };
 
@@ -38,7 +68,9 @@ const CategoryProgress = ({ stats }) => {
               ? Math.round((categoryStat.completed / categoryStat.total) * 100)
               : 0;
 
-          const { bg, text, fill } = categoryColors[categoryStat.category];
+          const color = categoryStat.category.replace(/_/g, " ");
+
+          const { bg, text, fill } = categoryColors[color];
 
           return (
             <div key={categoryStat.category}>
