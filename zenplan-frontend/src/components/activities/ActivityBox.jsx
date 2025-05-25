@@ -31,7 +31,7 @@ const ActivityBox = ({ mode, text, oldForm }) => {
         <Button
           onClick={() => setOpen(true)}
           className={
-            "bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] mt-3 md:mt-0"
+            "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] mt-3 md:mt-0"
           }
         >
           <Plus />

@@ -54,7 +54,7 @@ const Navbar = () => {
             <AlertBox
               btnName={"Log out"}
               css={
-                "ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--color-secondary)]"
+                "ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-[var(--color-secondary)] hover:bg-[var(--color-primary)]"
               }
               title={"Are you sure you want to log out?"}
               onClick={handleLogout}
@@ -101,7 +101,7 @@ const Navbar = () => {
             </Link>
             <button
               onClick={handleLogout}
-              className="w-full mt-2 text-left px-3 py-2 rounded-md text-base font-medium text-white bg-primary-400 hover:bg-primary-500"
+              className="w-full mt-2 text-left px-3 py-2 rounded-md text-base font-medium text-white "
             >
               Logout
             </button>

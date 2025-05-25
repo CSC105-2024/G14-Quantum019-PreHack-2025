@@ -1,6 +1,62 @@
 import React from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthContext } from "@/hooks/useAuthContext";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import AlertBox from "@/components/alert_box/AlertBox";
 
 const Settings = () => {
+  const { user } = useAuthContext();
+
+  const formSchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+  });
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: user.name || "",
+      email: user.email || "",
+    },
+  });
+
+  const passwordSchema = z.object({
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+    newPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters long"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters long"),
+  });
+
+  const formPassword = useForm({
+    resolver: zodResolver(passwordSchema),
+    defaultValues: {
+      password: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+
+  const onSubmitPassword = async (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="min-h-screen bg-neutral-50 flex flex-col">
       <main className="flex-1 px-4 py-6 max-w-6xl mx-auto w-full">
@@ -20,105 +76,138 @@ const Settings = () => {
                 Account Settings
               </h2>
 
-              {/* {message.text && (
-                <div
-                  className={`mb-4 p-3 rounded-md text-sm ${
-                    message.type === "success"
-                      ? "bg-success-100 text-success-700"
-                      : "bg-error-100 text-error-700"
-                  }`}
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className={"gap-4 flex flex-col"}
                 >
-                  {message.text}
-                </div>
-              )} */}
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter Name"
+                            {...field}
+                            className={"text-black"}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              {/* <form onSubmit={handleProfileUpdate}>
-                <Input
-                  label="Full Name"
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  icon={<User size={18} className="text-neutral-400" />}
-                />
-
-                <Input
-                  label="Email"
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  icon={<Mail size={18} className="text-neutral-400" />}
-                />
-
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="mt-2"
-                  isLoading={isSubmitting}
-                >
-                  Update Profile
-                </Button>
-              </form> */}
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter Email"
+                            {...field}
+                            className={"text-black"}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <AlertBox
+                    btnName={"Update Profile"}
+                    title={"Are you sure you want to update?"}
+                    onClick={form.handleSubmit(onSubmit)}
+                    css={
+                      "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] flex"
+                    }
+                  />
+                </form>
+              </Form>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
               <h2 className="text-lg font-medium text-neutral-800 mb-4">
                 Change Password
               </h2>
-
-              {/* <form onSubmit={handlePasswordUpdate}>
-                <Input
-                  label="Current Password"
-                  id="currentPassword"
-                  type="password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  icon={<Lock size={18} className="text-neutral-400" />}
-                />
-
-                <Input
-                  label="New Password"
-                  id="newPassword"
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  icon={<Lock size={18} className="text-neutral-400" />}
-                />
-
-                <Input
-                  label="Confirm New Password"
-                  id="confirmPassword"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  icon={<Lock size={18} className="text-neutral-400" />}
-                />
-
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="mt-2"
-                  isLoading={isSubmitting}
+              <Form {...formPassword}>
+                <form
+                  onSubmit={formPassword.handleSubmit(onSubmitPassword)}
+                  className={"gap-4 flex flex-col"}
                 >
-                  Update Password
-                </Button>
-              </form> */}
+                  <FormField
+                    control={formPassword.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Current Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            type={"password"}
+                            placeholder="Current Password"
+                            {...field}
+                            className={"text-black"}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={formPassword.control}
+                    name="newPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>New Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            type={"password"}
+                            placeholder="New Password"
+                            {...field}
+                            className={"text-black"}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={formPassword.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            type={"password"}
+                            placeholder="Confirm Password"
+                            {...field}
+                            className={"text-black"}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <AlertBox
+                    btnName={"Update Password"}
+                    title={"Are you sure you want to update your password?"}
+                    onClick={formPassword.handleSubmit(onSubmitPassword)}
+                    css={
+                      "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] flex"
+                    }
+                  />
+                </form>
+              </Form>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
               <h2 className="text-lg font-medium text-neutral-800 mb-4">
                 Account Actions
               </h2>
-
-              {/* <Button
-                variant="outline"
-                onClick={handleLogout}
-                fullWidth
-                className="border-error-300 text-error-600 hover:bg-error-50"
-              >
-                Logout
-              </Button> */}
             </div>
           </div>
 

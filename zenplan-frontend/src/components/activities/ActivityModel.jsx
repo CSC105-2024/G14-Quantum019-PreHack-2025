@@ -46,9 +46,12 @@ const ActivityModel = ({ mode, setOpen, oldForm }) => {
   const { createList } = useCreate();
   const { editList } = useEdit();
 
-  const cate = oldForm?.category.includes("_")
-    ? oldForm.category.replace("_", " ")
-    : oldForm.category;
+  let cate;
+  if (oldForm) {
+    cate = oldForm?.category?.includes("_")
+      ? oldForm?.category.replace("_", " ")
+      : oldForm?.category;
+  }
 
   const formSchema = z.object({
     title: z.string().nonempty("Title cannot be empty"),

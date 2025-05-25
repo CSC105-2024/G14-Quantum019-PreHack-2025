@@ -93,26 +93,6 @@ const ActivityList = ({ lists, onDeleteList, onToggleComplete }) => {
               </div>
             </div>
             <div className="flex space-x-1">
-              {/* <Button
-                variant="text"
-                size="sm"
-                onClick={() => onEditActivity(activity)}
-                aria-label="Edit activity"
-                className="p-1"
-              >
-                <Edit size={16} />
-              </Button>
-
-              <
-              <Button
-                variant="text"
-                size="sm"
-                onClick={() => deleteActivity(activity.id)}
-                aria-label="Delete activity"
-                className="text-error-500 p-1"
-              >
-                <Trash2 size={16} />
-              </Button> */}
               <ActivityBox mode={"edit"} oldForm={list} />
               <AlertBox
                 icon={Trash2}
