@@ -8,21 +8,21 @@ const Home = () => {
   const { data, setData } = useDataContext();
   const { fetchLists } = useFetch();
 
-  useEffect(() => {
-    const func = async () => {
-      const lists = await fetchLists();
-      setData(lists);
-    };
+  // useEffect(() => {
+  //   const func = async () => {
+  //     const lists = await fetchLists();
+  //     setData(lists);
+  //   };
 
-    func();
-  }, []);
+  //   func();
+  // }, []);
 
-  if (!data)
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-10 h-10 border-4 border-[var(--color-nav)] border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
+  // if (!data)
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <div className="w-10 h-10 border-4 border-[var(--color-nav)] border-t-transparent rounded-full animate-spin"></div>
+  //     </div>
+  //   );
 
   return (
     <div className=" bg-neutral-50 flex flex-col ">

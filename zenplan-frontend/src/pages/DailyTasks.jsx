@@ -1,4 +1,3 @@
-import { mockLists } from "@/mocklist";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -6,21 +5,23 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Plus, Calendar } from "lucide-react";
 import ActivityBox from "@/components/activities/ActivityBox";
 import ActivityList from "@/components/activities/ActivityList";
+import { useDataContext } from "@/hooks/useDataContext";
+import { useToggleList } from "@/hooks/useToggleList";
 
 const DailyTasks = () => {
   const { date } = useParams();
   const formattedDate = format(date, "EEEE, MMMM d, yyyy");
+  const { data } = useDataContext();
+  const { toggleList } = useToggleList();
 
-  const lists = mockLists.filter(
-    (list) => format(list.time, "yyyy-MM-dd") === date
-  );
+  const lists = data.filter((list) => format(list.time, "yyyy-MM-dd") === date);
 
   const deleteList = (id) => {
     console.log(id);
   };
 
-  const toggleComplete = (id) => {
-    console.log(id);
+  const toggleComplete = async (id) => {
+    await toggleList(id);
   };
 
   if (!date) {
