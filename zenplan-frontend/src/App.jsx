@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import { useAuthContext } from "./hooks/useAuthContext";
 import DailyTasks from "./pages/DailyTasks";
+import Settings from "./pages/Settings";
 
 const App = () => {
   const { user, dispatch, loading } = useAuthContext();
@@ -18,7 +19,7 @@ const App = () => {
         <Route path="/dashboard" element={<MainLayout />}>
           <Route path="home" element={<Home />} />
           <Route path="daily/:date" element={<DailyTasks />} />
-          {/* <Route path="/settings" element={<Settings />} /> */}
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </div>

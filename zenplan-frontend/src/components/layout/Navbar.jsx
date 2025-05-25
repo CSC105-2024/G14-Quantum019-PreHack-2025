@@ -42,9 +42,9 @@ const Navbar = () => {
               Calendar
             </Link>
             <Link
-              to="/settings"
+              to="/dashboard/settings"
               className={`px-3 py-2 rounded-md text-sm font-medium ${isActive(
-                "/settings"
+                "/dashboard/settings"
               )}`}
             >
               Profile & Stats
