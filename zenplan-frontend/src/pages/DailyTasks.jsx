@@ -7,17 +7,19 @@ import ActivityBox from "@/components/activities/ActivityBox";
 import ActivityList from "@/components/activities/ActivityList";
 import { useDataContext } from "@/hooks/useDataContext";
 import { useToggleList } from "@/hooks/useToggleList";
+import { useDeleteList } from "@/hooks/useDelete";
 
 const DailyTasks = () => {
   const { date } = useParams();
   const formattedDate = format(date, "EEEE, MMMM d, yyyy");
   const { data } = useDataContext();
   const { toggleList } = useToggleList();
+  const { deleteList } = useDeleteList();
 
   const lists = data.filter((list) => format(list.time, "yyyy-MM-dd") === date);
 
-  const deleteList = (id) => {
-    console.log(id);
+  const onDeleteList = async (id) => {
+    await deleteList(id);
   };
 
   const toggleComplete = async (id) => {
@@ -54,7 +56,7 @@ const DailyTasks = () => {
 
         <ActivityList
           lists={lists}
-          onDeleteList={deleteList}
+          onDeleteList={onDeleteList}
           onToggleComplete={toggleComplete}
         />
       </main>
