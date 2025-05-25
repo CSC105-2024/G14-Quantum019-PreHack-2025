@@ -55,6 +55,7 @@ const categoryColors = {
 };
 
 const CategoryProgress = ({ stats }) => {
+  console.log(stats.categoriesStats);
   return (
     <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6 mb-6">
       <h3 className="text-lg font-medium text-neutral-800 mb-4">
@@ -71,6 +72,8 @@ const CategoryProgress = ({ stats }) => {
           const color = categoryStat.category.replace(/_/g, " ");
 
           const { bg, text, fill } = categoryColors[color];
+
+          console.log(categoryStat.completed);
 
           return (
             <div key={categoryStat.category}>

@@ -16,15 +16,15 @@ export const useGetUserStats = (lists) => {
   ];
 
   const categoriesStats = categories.map((category) => {
-    const categoryActivities = lists.filter((a) => a.category === category);
+    const categoryActivities = lists.filter(
+      (a) => a.category.replace(/_/g, " ") === category
+    );
     return {
       category,
       completed: categoryActivities.filter((a) => a.is_complete).length,
       total: categoryActivities.length,
     };
   });
-
-  console.log(completedActivities);
 
   return {
     totalActivities,
