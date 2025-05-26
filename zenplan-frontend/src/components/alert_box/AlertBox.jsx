@@ -15,6 +15,9 @@ import { RxCross2 } from "react-icons/rx";
 import { Trash2 } from "lucide-react";
 
 const AlertBox = ({ btnName, css, title, onClick }) => {
+  const handleConfirm = async () => {
+    await onClick();
+  };
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -49,7 +52,7 @@ const AlertBox = ({ btnName, css, title, onClick }) => {
             className={
               "w-30 text-white bg-[var(--color-secondary)] hover:bg-[var(--color-primary)]"
             }
-            onClick={onClick}
+            onClick={handleConfirm}
           >
             Yes
           </AlertDialogAction>
