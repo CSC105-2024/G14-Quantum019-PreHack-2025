@@ -1,4 +1,4 @@
-# Zen Plan
+# Zen Plan 🧘‍♀️
 
 ## Project Overview
 
@@ -6,40 +6,28 @@
 
 ### Objectives
 
-- Provide a structured weekly calendar for planning health-related activities.
-- Empower users to create routines for physical, mental, and emotional wellness.
-- Encourage habit formation with visual tracking, checkmarks, and reminders.
-- Support holistic wellness by balancing movement, rest, and nourishment.
+- 📅 Provide a structured weekly calendar for planning health-related activities.
+- 💪 Empower users to create routines for physical, mental, and emotional wellness.
+- ✅ Encourage habit formation with visual tracking, checkmarks, and reminders.
+- 🌱 Support holistic wellness by balancing movement, rest, and nourishment.
 
 ## Key Features
 
-- **Authentication**: Secure login and sign-up functionality using **JWT (JSON Web Tokens)** for token-based user sessions.
-- **Home Page**: Calendar view with a clean, calming UI for routine planning.
-- **Custom Activities**: Add/edit wellness tasks like:
-
-  - Yoga
-  - Meal Prep
-  - Meditation
-  - Exercise
-  - Medical Checkup
-
-- **Wellness Tags**: Organize tasks by category:
-
-  - Self-care
-  - Physical
-  - Nutrition
-  - Health
-
-- **Daily Tasks Page**: View, add, edit, and delete daily tasks with additional notes.
-- **Statistics & Settings**: View completed tasks by category and manage preferences.
-
-## Tech Stack
-
-- **Frontend**: [React](https://reactjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Backend**: [Hono (TypeScript)](https://hono.dev/)
-- **Database**: [SQLite](https://www.sqlite.org/index.html)
-- **Authentication**: JWT (JSON Web Tokens)
+- **Authentication** 🔐: Secure login and sign-up functionality using **JWT (JSON Web Tokens)** for token-based user sessions.
+- **Home Page** 🏠: Calendar view with a clean, calming UI for routine planning.
+- **Custom Activities** 🎯: Add/edit wellness tasks like:
+- Yoga
+- Meal Prep
+- Meditation
+- Exercise
+- Medical Checkup
+- **Wellness Tags** 🏷️: Organize tasks by category:
+- Self-care
+- Physical
+- Nutrition
+- Health
+- **Daily Tasks Page** 📋: View, add, edit, and delete daily tasks with additional notes.
+- **Statistics & Settings** 📊: View completed tasks by category and manage preferences.
 
 ---
 
@@ -48,13 +36,13 @@
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/CSC105-2024/G14-Quantum019-PreHack-2025.git
+cd G14-ZenPlan
 ```
 
 ---
 
-## Frontend - React
+## Frontend - React ⚛️
 
 ### Tech Stack
 
@@ -71,22 +59,20 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5174](http://localhost:5174) to view the app.
+## Open [http://localhost:5173](http://localhost:5173) to view the app.
 
----
-
-## Backend - Node.js (Hono + TypeScript)
+## Backend - Node.js (Hono + TypeScript) 🔥
 
 ### Tech Stack
 
 - Node.js
 - Hono (TypeScript)
-- SQLite
+- MySQL
 - JWT
 
 ### API Endpoints
 
-#### User Routes
+#### User Routes 👥
 
 | Method | Endpoint            | Description             |
 | ------ | ------------------- | ----------------------- |
@@ -96,7 +82,7 @@ Open [http://localhost:5174](http://localhost:5174) to view the app.
 | PUT    | /user/edit/info     | Edit user profile info  |
 | PATCH  | /user/edit/password | Change user password    |
 
-#### List Routes
+#### List Routes 📝
 
 | Method | Endpoint          | Description                 |
 | ------ | ----------------- | --------------------------- |
@@ -118,7 +104,7 @@ Create a `.env` file with:
 
 ```
 PORT=3000
-DATABASE_URL=your_sqlite_connection_string
+DATABASE_URL=your_mysql_connection_string
 ```
 
 Then start the dev server:
@@ -127,4 +113,4 @@ Then start the dev server:
 npm run dev
 ```
 
-Backend runs at [http://localhost:3000](http://localhost:3000)
+Backend runs at [http://localhost:3000](http://localhost:3000) 🌐
