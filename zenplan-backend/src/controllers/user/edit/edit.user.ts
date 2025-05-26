@@ -9,12 +9,13 @@ const editInfo = async (c: Context) => {
 
   try {
     const info = await userModel.editInfo(body, user_id);
-    console.log(body);
+
+    const { id, ...rest } = info;
 
     return c.json(
       {
         success: true,
-        data: info,
+        data: { ...rest },
         msg: `Successful`,
       },
       200
