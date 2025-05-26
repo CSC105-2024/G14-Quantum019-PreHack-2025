@@ -5,7 +5,7 @@ import { getSignedCookie } from "hono/cookie";
 import { findInfo } from "../models/user.model.ts";
 
 const verify = async (c: Context, next: Next) => {
-    try {
+  try {
     const cookie = await getSignedCookie(
       c,
       process.env.COOKIE_SECRET_KEY!,
@@ -14,10 +14,7 @@ const verify = async (c: Context, next: Next) => {
 
     if (typeof cookie !== "string") throw new Error("Invalid or missing token");
 
-    const { id } = jwt.verify(
-      cookie,
-      process.env.JWT_SECRET!
-    ) as Id;
+    const { id } = jwt.verify(cookie, process.env.JWT_SECRET!) as Id;
 
     const info = await findInfo(id);
 

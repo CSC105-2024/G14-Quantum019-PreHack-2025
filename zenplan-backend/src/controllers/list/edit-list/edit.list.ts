@@ -4,18 +4,14 @@ import * as ListModel from "../../../models/list.model.ts";
 
 const editList = async (c: Context) => {
   const id = parseInt(c.req.param("id"));
-  const user_id = 1; //TODO: temp
+  const user_id = c.get("user_id");
 
-  const { title, category, time, description, note }: List = await c.req.json();
+  const body: List = await c.req.json();
 
   try {
     const editedList = await ListModel.editList(
       {
-        title,
-        category,
-        time,
-        description,
-        note,
+        ...body,
       },
       {
         id,

@@ -3,7 +3,7 @@ import * as ListModel from "../../../models/list.model.ts";
 
 const deletList = async (c: Context) => {
   const id = parseInt(c.req.param("id"));
-  const user_id = 1; //TODO: temp
+  const user_id = c.get("user_id");
 
   try {
     const deletedList = await ListModel.deleteList({ id, user_id });

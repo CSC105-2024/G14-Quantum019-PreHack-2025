@@ -5,9 +5,11 @@ import { editList } from "../controllers/list/edit-list/edit.list.ts";
 import { deletList } from "../controllers/list/delete-list/delete.list.ts";
 import { toggleList } from "../controllers/list/toggle-list/toggle.list.ts";
 import { completeLists } from "../controllers/list/complete-all-list/complete.list.ts";
+import { verify } from "../middlewares/verify.ts";
 
 const listRouter = new Hono();
 
+listRouter.use(verify);
 listRouter.get("/get", getLists);
 listRouter.post("/create", createList);
 listRouter.put("/edit/:id", editList);

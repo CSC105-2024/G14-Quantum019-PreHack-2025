@@ -3,19 +3,15 @@ import type { List } from "../../../types/types.ts";
 import * as ListModel from "../../../models/list.model.ts";
 
 const createList = async (c: Context) => {
-  const { title, category, time, description, note }: List = await c.req.json();
+  const body: List = await c.req.json();
+  const user_id = c.get("user_id");
 
-  //TODO:Temp
-  const user_id = 1;
+  console.log(body);
 
   try {
     const list = await ListModel.createList(
       {
-        title,
-        category,
-        time,
-        description,
-        note,
+        ...body,
       },
       user_id
     );
