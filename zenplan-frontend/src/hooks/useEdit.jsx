@@ -1,7 +1,6 @@
 import axiosInstance from "@/axiosInstance";
 import React, { useState } from "react";
 import { useDataContext } from "./useDataContext";
-import { toast } from "sonner";
 
 export const useEdit = () => {
   const [editError, setEditError] = useState(null);
