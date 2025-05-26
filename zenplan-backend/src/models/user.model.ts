@@ -1,4 +1,5 @@
 import { db } from "../index.ts";
+import type { EditInfo } from "../types/types.ts";
 
 const registerUser = async (name: string, email: string, trx: any) => {
   const user = await trx.user.create({
@@ -35,4 +36,32 @@ const findInfo = async (identifier: string | number) => {
   return user;
 };
 
-export { registerUser, registerPassword, findPassword, findInfo };
+const editInfo = async (info: EditInfo, user_id: number) => {
+  const user = await db.user.update({
+    where: { id: user_id },
+    data: {
+      name: info.name,
+      email: info.email,
+    },
+  });
+
+  return user;
+};
+
+const updatePassword = async (hash: string, user_id: number) => {
+  await db.password.update({
+    where: { id: user_id },
+    data: {
+      hash: hash,
+    },
+  });
+};
+
+export {
+  registerUser,
+  registerPassword,
+  findPassword,
+  findInfo,
+  editInfo,
+  updatePassword,
+};

@@ -17,11 +17,13 @@ import StatisticsCards from "@/components/stats/StatisticsCards";
 import CategoryProgress from "@/components/stats/CategoryProgress";
 import { useDataContext } from "@/hooks/useDataContext";
 import { useGetUserStats } from "@/hooks/useGetUserStats";
+import { useLogout } from "@/hooks/useLogout";
 
 const Settings = () => {
   const { user } = useAuthContext();
   const { data } = useDataContext();
   const stats = useGetUserStats(data);
+  const { logout } = useLogout();
 
   const formSchema = z.object({
     name: z.string(),
@@ -64,7 +66,7 @@ const Settings = () => {
   };
 
   const handleLogout = async () => {
-    console.log("ok");
+    await logout();
   };
 
   return (

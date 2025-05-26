@@ -1,23 +1,23 @@
 type Hash = {
-    hash: string;
-}
+  hash: string;
+};
 
 type Login = {
-    email: string;
-    password: string;
-}
+  email: string;
+  password: string;
+};
 
 type Id = {
   id: number;
 };
 
 type createUser = {
-    name: string,
-    email: string,
-    password: string,
-}
+  name: string;
+  email: string;
+  password: string;
+};
 
-export type { Hash, Login, Id, createUser }
+export type { Hash, Login, Id, createUser };
 import type { $Enums } from "../generated/prisma/client.js";
 
 type List = {
@@ -33,4 +33,9 @@ type IdPair = {
   user_id: number;
 };
 
-export type { List, IdPair };
+type EditInfo = {
+  name: string;
+  email: string;
+};
+
+export type { List, IdPair, EditInfo };
