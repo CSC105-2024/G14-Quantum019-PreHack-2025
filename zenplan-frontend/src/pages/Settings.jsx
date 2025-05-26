@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,12 +18,16 @@ import CategoryProgress from "@/components/stats/CategoryProgress";
 import { useDataContext } from "@/hooks/useDataContext";
 import { useGetUserStats } from "@/hooks/useGetUserStats";
 import { useLogout } from "@/hooks/useLogout";
+import useEditInfo from "@/hooks/useEditInfo";
+import { useEditPassword } from "@/hooks/useEditPassword";
 
 const Settings = () => {
   const { user } = useAuthContext();
   const { data } = useDataContext();
   const stats = useGetUserStats(data);
   const { logout } = useLogout();
+  const { editInfo } = useEditInfo();
+  const { editPassword } = useEditPassword();
 
   const formSchema = z.object({
     name: z.string(),
@@ -58,11 +62,11 @@ const Settings = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    await editInfo(data.name, data.email);
   };
 
   const onSubmitPassword = async (data) => {
-    console.log(data);
+    await editPassword(data.password, data.newPassword, data.confirmPassword);
   };
 
   const handleLogout = async () => {
